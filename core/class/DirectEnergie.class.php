@@ -16,13 +16,6 @@ class DirectEnergie extends eqLogic {
 	}	
 	public static function Ereleve($value) 	{
 		$fields = array(
-			'tx_degcecfluid_pi1[__referrer][@extension]' => "DeGcEcFluid",
-			'tx_degcecfluid_pi1[__referrer][@vendor]' => "DirectEnergie",
-			'tx_degcecfluid_pi1[__referrer][@controller]' => "EcGc",
-			'tx_degcecfluid_pi1[__referrer][@action]' => "autoReleve",
-			'tx_degcecfluid_pi1[__referrer][arguments]'=>"Je me connecte",
-			'tx_degcecfluid_pi1[__referrer][@request]' => "",
-			'tx_degcecfluid_pi1[__trustedProperties]' => "",
 			'tx_degcecfluid_pi1[autoReleveElec][releveElecHp]' => $value,
 			'tx_degcecfluid_pi1[autoReleveElec][optinElec]' => "1",
 			'tx_degcecfluid_pi1[pds]' => "",
@@ -36,7 +29,6 @@ class DirectEnergie extends eqLogic {
 		);
 		$url="https://clients.direct-energie.com/mon-espace-client/";
 		$result= self::SendRequet($url,$fields);
-		log::add('DirectEnergie','debug',json_encode($result));
 	}
 	public static function MonCompte(){
 		$fields = array(
@@ -47,10 +39,10 @@ class DirectEnergie extends eqLogic {
 			'tx_deauthentification[mdp_oublie]' => 'Je me connecte'
 		);
 		$url="https://particuliers.direct-energie.com/mon-espace-client/";
-		$result= self::SendRequet($url,$fields);
-		log::add('DirectEnergie','debug',json_encode($result));
+		self::SendRequet($url,$fields);
 	}
 	public static function SendRequet($url,$fields)	{
+		$cookie = '/tmp/cookiesDirectEnergie.txt';
 		log::add('DirectEnergie','debug',"Connextion a: ".$url);
 		$postvars = '';
 		foreach($fields as $key=>$value) {
@@ -64,13 +56,11 @@ class DirectEnergie extends eqLogic {
 		curl_setopt ($ch, CURLOPT_TIMEOUT, 20);
 		curl_setopt ($ch, CURLOPT_FOLLOWLOCATION,1);
 		curl_setopt ($ch, CURLOPT_RETURNTRANSFER, 1);
-		$cookie = '/tmp/cookiesDirectEnergie.txt';
 		curl_setopt ($ch, CURLOPT_COOKIEJAR, $cookie);
 		curl_setopt ($ch, CURLOPT_COOKIEFILE, $cookie);
 		curl_setopt ($ch, CURLOPT_POSTFIELDS, $postvars);
 		curl_setopt ($ch, CURLOPT_POST, 1);
 		$response = curl_exec($ch);
-		//log::add('DirectEnergie','debug',"Réponse: ".json_encode($response));
 		curl_close ($ch);
 		return $response;
 	}
