@@ -7,14 +7,14 @@ class DirectEnergie extends eqLogic {
     /*     * *************************Attributs****************************** */
 	/*     * ***********************Methode static*************************** */
 	/*     * *********************Methode d'instance************************* */
-   public function preUpdate() {
-    }  
-    public function preInsert() {
+   	public function preUpdate() {
+    	}  
+    	public function preInsert() {
 	}    
-    public function postSave() {
+    	public function postSave() {
 		self::AddCmd($this,'Relevé de compteur','Ereleve',"action", 'default');
-    }	
-		public static function Ereleve($value) 	{
+	}	
+	public static function Ereleve($value) 	{
 		$fields = array(
 			'tx_degcecfluid_pi1[__referrer][@extension]' => "DeGcEcFluid",
 			'tx_degcecfluid_pi1[__referrer][@vendor]' => "DirectEnergie",
@@ -70,6 +70,7 @@ class DirectEnergie extends eqLogic {
 		curl_setopt ($ch, CURLOPT_POSTFIELDS, $postvars);
 		curl_setopt ($ch, CURLOPT_POST, 1);
 		$response = curl_exec($ch);
+		log::add('DirectEnergie','debug',"Réponse: ".json_encode($response));
 		curl_close ($ch);
 		return $response;
 	}
