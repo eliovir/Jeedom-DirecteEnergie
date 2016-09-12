@@ -5,6 +5,7 @@ require_once dirname(__FILE__) . '/../../../../core/php/core.inc.php';
 
 class DirectEnergie extends eqLogic {
     /*     * *************************Attributs****************************** */
+    	private $cookie;
 	/*     * ***********************Methode static*************************** */
 	/*     * *********************Methode d'instance************************* */
    	public function preUpdate() {
@@ -64,8 +65,8 @@ class DirectEnergie extends eqLogic {
 		curl_setopt ($ch, CURLOPT_TIMEOUT, 20);
 		curl_setopt ($ch, CURLOPT_FOLLOWLOCATION,1);
 		curl_setopt ($ch, CURLOPT_RETURNTRANSFER, 1);
-		//curl_setopt ($ch, CURLOPT_COOKIEJAR, $cookie);
-		//curl_setopt ($ch, CURLOPT_COOKIEFILE, $cookie);
+		curl_setopt ($ch, CURLOPT_COOKIEJAR, $this->cookie);
+		curl_setopt ($ch, CURLOPT_COOKIEFILE, $this->cookie);
 		curl_setopt ($ch, CURLOPT_POSTFIELDS, $postvars);
 		curl_setopt ($ch, CURLOPT_POST, 1);
 		$response = curl_exec($ch);
