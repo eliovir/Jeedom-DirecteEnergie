@@ -39,15 +39,14 @@ class DirectEnergie extends eqLogic {
 		log::add('DirectEnergie','debug',json_encode($result));
 	}
 	public static function MonCompte(){
-
 		$fields = array(
 			'tx_deauthentification[form_valid]' => "1",
 			'tx_deauthentification[redirect_url]' => "",
 			'tx_deauthentification[login]' => config::byKey('login', 'DirectEnergie'),
 			'tx_deauthentification[password]' => config::byKey('password', 'DirectEnergie'),
-			'tx_deauthentification[mdp_mem]' =>"1"
+			'tx_deauthentification[mdp_oublie]' => 'Je me connecte'
 		);
-		$url="https://clients.direct-energie.com/mon-espace-client/";
+		$url="https://particuliers.direct-energie.com/mon-espace-client/";
 		$result= self::SendRequet($url,$fields);
 		log::add('DirectEnergie','debug',json_encode($result));
 	}
@@ -70,7 +69,7 @@ class DirectEnergie extends eqLogic {
 		curl_setopt ($ch, CURLOPT_POSTFIELDS, $postvars);
 		curl_setopt ($ch, CURLOPT_POST, 1);
 		$response = curl_exec($ch);
-		log::add('DirectEnergie','debug',"Réponse: ".json_encode($response));
+		//log::add('DirectEnergie','debug',"Réponse: ".json_encode($response));
 		curl_close ($ch);
 		return $response;
 	}
