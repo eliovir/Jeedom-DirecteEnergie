@@ -87,7 +87,7 @@ class DirectEnergieCmd extends cmd {
 		$compteur=cmd::byId(str_replace('#','',$this->getEqLogic()->getConfiguration('compteur')));
 		if(is_object($compteur)){
 			$this->getEqLogic()->MonCompte();
-			$this->getEqLogic()->Ereleve($compteur->execCmd()/1000,$compteur->getEqLogic()->getLogicalId());
+			$this->getEqLogic()->Ereleve(round($compteur->execCmd()/1000),$compteur->getEqLogic()->getLogicalId());
 		}
     }
 }
