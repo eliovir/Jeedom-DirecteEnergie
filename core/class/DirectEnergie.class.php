@@ -61,7 +61,7 @@ class DirectEnergie extends eqLogic {
 		curl_setopt ($ch, CURLOPT_POSTFIELDS, $postvars);
 		curl_setopt ($ch, CURLOPT_POST, 1);
 		$response = curl_exec($ch);
-		curl_close ($ch);
+		//curl_close ($ch);
 		return $response;
 	}
 	public static function AddCmd($Equipement,$Name,$_logicalId,$Type="info", $SubType='') 	{
