@@ -17,18 +17,17 @@ class DirectEnergie extends eqLogic {
 	public function Ereleve($value,$compteurId) 	{
 		$fields = array(
 			'tx_degcecfluid_pi1[autoReleveElec][releveElecHp]' => $value,
-			'tx_degcecfluid_pi1[autoReleveElec][optinElec]' => "1",
+			'tx_degcecfluid_pi1[autoReleveElec][optinElec]' => true,
 			'tx_degcecfluid_pi1[pds]' => "",
 			'tx_degcecfluid_pi1[type]' => "",
-			'tx_degcecfluid_pi1[autoReleveElec][parMultisite]' => "0",
+			'tx_degcecfluid_pi1[autoReleveElec][parMultisite]' => false,
 			'tx_degcecfluid_pi1[autoReleveElec][validType]' => "valid_elec",
 			'tx_degcecfluid_pi1[autoReleveElec][podElec]' => $compteurId,
 			'tx_degcecfluid_pi1[autoReleveElec][forceElec]' => "",
 			'tx_degcecfluid_pi1[autoReleveElec][typeElec]' => "BA",
-			'tx_degcecfluid_pi1[mdp_mem]' => "1",
-			'tx_degcecfluid_pi1[btn_valid_releve_elec]' => "Je valide"
+			'tx_degcecfluid_pi1[mdp_mem]' => false
 		);
-		$url="https://clients.direct-energie.com/mon-espace-client/";
+		$url="https://clients.direct-energie.com/ma-conso/faire-mon-e-releve/";
 		$result= self::SendRequet($url,$fields);
 	}
 	public function MonCompte(){
@@ -62,7 +61,6 @@ class DirectEnergie extends eqLogic {
 		curl_setopt ($ch, CURLOPT_POSTFIELDS, $postvars);
 		curl_setopt ($ch, CURLOPT_POST, 1);
 		$response = curl_exec($ch);
-		log::add('DirectEnergie','debug',"$response: ".$response);
 		curl_close ($ch);
 		return $response;
 	}
