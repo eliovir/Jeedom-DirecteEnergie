@@ -62,6 +62,7 @@ class DirectEnergie extends eqLogic {
 		curl_setopt ($ch, CURLOPT_POSTFIELDS, $postvars);
 		curl_setopt ($ch, CURLOPT_POST, 1);
 		$response = curl_exec($ch);
+		log::add('DirectEnergie','debug',"$response: ".$response);
 		curl_close ($ch);
 		return $response;
 	}
