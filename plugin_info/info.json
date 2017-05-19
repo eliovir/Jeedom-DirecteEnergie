@@ -1,0 +1,9 @@
+{
+	"id" : "DirectEnergie",
+	"name" : "Direct Energie",
+	"description" : "Ce plugin permet d'envoyer des requette d'auto-relevé sur votre compte directe energie",
+	"licence" : "AGPL",
+	"author" : "Halbout Michael",
+	"require" : "3.0",
+	"category" : "energy"
+}
